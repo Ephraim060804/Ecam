@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECAM - Splash Screen</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* EMPLACEMENT IMAGE D'ARRIÈRE-PLAN - CHANGEZ L'URL ICI */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            z-index: 0;
+        }
+
+        /* Overlay subtil pour meilleure lisibilité */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Conteneur principal avec effet glassmorphism */
+        .Glass {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px) saturate(150%);
+            -webkit-backdrop-filter: blur(15px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2.5rem;
+            gap: 1.8rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15),
+                        0 0 0 1px rgba(255, 255, 255, 0.1),
+                        inset 0 0 20px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        /* Style pour le conteneur d'image */
+        .Glass .image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .Glass .image img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+
+        /* Style pour le texte */
+        .Glass .text h2 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-align: center;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            line-height: 1.4;
+        }
+
+        /* Animation de chargement */
+        .loading-dots {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0.6);
+                opacity: 0.4;
+            }
+            40% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .Glass {
+                padding: 2.5rem 2rem;
+                gap: 1.5rem;
+            }
+            
+            .Glass .image {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .Glass .text h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="F:\Projet de soutenance\images\Université.jpg" alt="Image de fond"
+         class="background-image">
+    
+   
+    <div class="overlay"></div>
+
+   
+    <div class="Glass">
+        <div class="image">
+           
+            <img src="F:\Projet de soutenance\images\Ecam.png" 
+                 alt="Logo ECAM"
+                 onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect width=%22100%25%22 height=%22100%25%22 fill=%22%23f0f0f0%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23333%22 font-size=%2216%22%3EECAM%3C/text%3E%3C/svg%3E'">
+        </div>
+        <div class="text">
+            <h2>Ecole Canadienne<br>de Management</h2>
+        </div>
+
+        <div class="loading-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</body>
+</html>

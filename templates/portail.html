@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ECAM - Portail d'authentification unifié</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#06402b",
+                        "on-primary": "#ffffff",
+                        surface: "#ffffff",
+                        "on-surface": "#1a1c1e",
+                        "surface-container": "#f3f3f3",
+                        "surface-container-low": "#f2f4f6",
+                        outline: "#6f7a73",
+                        "outline-variant": "#bec9c1",
+                    },
+                    borderRadius: {
+                        '15px': '15px',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+        }
+        .active-tab { box-shadow: 0 4px 14px 0 rgba(6, 64, 43, 0.15); border: 1px solid #06402b; }
+        
+        #chat-window {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+        }
+        #chat-window.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="bg-white text-on-surface min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="bg-white/80 backdrop-blur-xl flex justify-between items-center w-full px-10 py-4 max-w-7xl mx-auto sticky top-0 z-50 border-b border-gray-100">
+<div class="flex items-center gap-2">
+<img alt="ECAM Congo" class="h-10 w-auto" src="https://lh3.googleusercontent.com/aida/AP1WRLsvnLuq8yS9r5BAKjjCv4oUiBVjtSQTNoURAk0IwJupw-fSJ4_iZ-YB33adwgNBRV_gUrzR5LmKBNGAuGM0O6LJtS2GXH2nIklR1E48alBJaXHb4c9lL-VpYyt5u_v4A4Wn26NOW2iiZhU6gXiGGhvj_23RgYZjHFZERzDQbx9GngQmXh6yIZKZ1esHUIVg_cgDCJZGCk6Phq_X7ic0PbPdyLfQzlBuFFbJ0Q-mIjwDIOyvK-Cdz3lvGEA"/>
+<span class="font-bold text-primary text-xl">ECAM Congo</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-gray-600 hover:text-primary transition-colors" href="#">Accueil</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Portail</a>
+<a class="text-gray-600 hover:text-primary transition-colors" href="#">Contact</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all">notifications</button>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-semibold transition-all active:scale-95 shadow-md shadow-primary/20">Connexion</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex items-center justify-center relative py-16 px-6 overflow-hidden">
+<!-- Background Decor -->
+<div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+<div class="absolute bottom-0 left-0 w-96 h-96 bg-primary rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+</div>
+<!-- Shader Background Layer -->
+<div class="absolute inset-0 w-full h-full pointer-events-none opacity-60 z-5">
+<canvas class="w-full h-full" id="shader-canvas"></canvas>
+</div>
+<!-- Authentication Card -->
+<div class="relative z-10 w-full max-w-md glass-card rounded-15px shadow-[0_35px_100px_-15px_rgba(6,64,43,0.4)] border border-white/30 overflow-hidden">
+<div class="p-8 pb-4 text-center">
+<div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary mb-4 text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined !text-4xl" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+<h1 class="text-3xl font-bold text-primary mb-2">Bienvenue</h1>
+<p class="text-gray-600">Accédez à votre écosystème académique ECAM Congo.</p>
+</div>
+<!-- Role Selector -->
+<div class="px-8 mb-6">
+<div class="grid grid-cols-3 gap-2 p-1 bg-gray-50 rounded-xl border border-gray-200">
+<button class="role-tab flex flex-col items-center justify-center py-3 rounded-lg bg-white text-primary active-tab transition-all" id="tab-student" onclick="switchRole('student')">
+<span class="material-symbols-outlined !text-xl mb-1">school</span>
+<span class="text-xs font-medium">Étudiants</span>
+</button>
+<button class="role-tab flex flex-col items-center justify-center py-3 rounded-lg text-gray-500 hover:bg-white/50 transition-all" id="tab-prof" onclick="switchRole('prof')">
+<span class="material-symbols-outlined !text-xl mb-1">person_book</span>
+<span class="text-xs font-medium">Professeurs</span>
+</button>
+<button class="role-tab flex flex-col items-center justify-center py-3 rounded-lg text-gray-500 hover:bg-white/50 transition-all" id="tab-admin" onclick="switchRole('admin')">
+<span class="material-symbols-outlined !text-xl mb-1">admin_panel_settings</span>
+<span class="text-xs font-medium">Direction</span>
+</button>
+</div>
+</div>
+<!-- Login Form -->
+<form class="px-8 pb-10 space-y-5" onsubmit="event.preventDefault();">
+<div class="space-y-1">
+<label class="text-sm font-semibold text-gray-700 ml-1" for="username" id="role-id-label">Email Étudiant</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">alternate_email</span>
+<input class="w-full h-12 pl-12 pr-4 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" id="username" placeholder="nom.prenom@ecamcongo.com" type="email"/>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between items-center px-1">
+<label class="text-sm font-semibold text-gray-700" for="password">Mot de passe</label>
+<a class="text-xs text-primary hover:underline" href="#">Oublié ?</a>
+</div>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full h-12 pl-12 pr-4 bg-white border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all" id="password" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<button class="w-full h-14 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:opacity-90 transition-all active:scale-[0.98] mt-2 flex items-center justify-center gap-2" type="submit">
+                    Se connecter
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<div class="relative py-4">
+<div class="absolute inset-0 flex items-center"><div class="w-full border-t border-gray-100"></div></div>
+<div class="relative flex justify-center text-[10px] uppercase tracking-wider text-gray-400"><span class="bg-white px-2">Connexion SSO sécurisée</span></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 h-11 border border-gray-200 rounded-lg text-sm text-gray-600 hover:bg-gray-50 transition-all" type="button">
+<img alt="Google" class="w-4 h-4 opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzAUcLZccASyUaI3f05u9r0cJjBO8Dzb2f8HSRN0hWDcMI-pMkRGKjzx6PHydeCIMvusP-PxSUGVEOGyX8K3-nUvCZuaI4bxA01HJRiulp8uKBX2ANeTBdadAGxqCt55El7dkdwAIeez40qk0LSteH0a8FduiLz_eLiOmca7S3SkdTcQzvCXxB5Azt4avitf1AcotelDtHTQ6gPicr8C5vfpCMCIAPsFY89A3wDWA5S0OkXnTJws7b"/>
+                        Google
+                    </button>
+<button class="flex items-center justify-center gap-2 h-11 border border-gray-200 rounded-lg text-sm text-gray-600 hover:bg-gray-50 transition-all" type="button">
+<img alt="Office 365" class="w-4 h-4 opacity-70" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOF4cbvrkUViIJK-VXN9AbTUfh97LFul9YhalMK-slfX3SAssu-2x8Yk1BXU-qb6LxMLPZwN1R08-0pzgeSEDNkFZJ9VAlHzGWLrLJomC2RbrQcyzyBFWBts5JHKKz-4IYC8qBzhk_gYEJPqbLK-ZujxXnNCtAFClpOs4JnU2cPz-ETAoEr1L-SZIo3ihblHr41IDdaCnVbal2-tNcr7zqlYA0_f9OSlHmlp6h6eOIATknJPc1b_Fg"/>
+                        Office 365
+                    </button>
+</div>
+</form>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-primary text-white py-12 px-10">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+<div class="space-y-4">
+<div class="flex items-center gap-2">
+<img alt="ECAM Congo" class="h-8 w-auto brightness-0 invert" src="https://lh3.googleusercontent.com/aida/AP1WRLsvnLuq8yS9r5BAKjjCv4oUiBVjtSQTNoURAk0IwJupw-fSJ4_iZ-YB33adwgNBRV_gUrzR5LmKBNGAuGM0O6LJtS2GXH2nIklR1E48alBJaXHb4c9lL-VpYyt5u_v4A4Wn26NOW2iiZhU6gXiGGhvj_23RgYZjHFZERzDQbx9GngQmXh6yIZKZ1esHUIVg_cgDCJZGCk6Phq_X7ic0PbPdyLfQzlBuFFbJ0Q-mIjwDIOyvK-Cdz3lvGEA"/>
+<span class="font-bold text-lg">ECAM Congo</span>
+</div>
+<p class="text-sm opacity-80">© 2024 ECAM Congo. Former les ingénieurs de la nouvelle Afrique.</p>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-bold uppercase text-xs tracking-widest opacity-60">Ressources</span>
+<a class="text-sm hover:underline" href="#">Calendrier académique</a>
+<a class="text-sm hover:underline" href="#">Vie du campus</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-bold uppercase text-xs tracking-widest opacity-60">Support</span>
+<a class="text-sm hover:underline" href="#">Assistance technique</a>
+<a class="text-sm hover:underline" href="#">Confidentialité</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="font-bold uppercase text-xs tracking-widest opacity-60">Social</span>
+<div class="flex gap-4">
+<a class="hover:opacity-70" href="#"><span class="material-symbols-outlined">language</span></a>
+<a class="hover:opacity-70" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Assistant IA Widget -->
+<div class="fixed right-6 bottom-6 flex flex-col items-end gap-4 z-50">
+<div class="w-80 h-[450px] bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col" id="chat-window">
+<div class="bg-primary p-4 flex items-center justify-between text-on-primary">
+<div class="flex items-center gap-3 text-white">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-bold">Assistant ECAM</span>
+</div>
+<button class="hover:bg-white/20 rounded-full p-1 transition-colors text-white" id="close-chat">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50/50" id="chat-messages">
+<div class="bg-white border border-gray-100 p-3 rounded-lg rounded-tl-none max-w-[85%] text-sm shadow-sm">
+                    Bonjour ! Je suis l'assistant IA d'ECAM Congo. Comment puis-je vous aider dans votre authentification aujourd'hui ?
+                </div>
+</div>
+<div class="p-4 border-t border-gray-100 bg-white">
+<div class="relative">
+<input class="w-full bg-surface-container-low border-none rounded-full py-2.5 px-4 pr-12 text-sm focus:ring-2 focus:ring-primary outline-none" id="chat-input" placeholder="Posez votre question..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary p-1 hover:bg-primary/5 rounded-full" id="send-btn">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-14 h-14 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all z-50 group" id="ai-assistant-toggle">
+<span class="material-symbols-outlined !text-3xl" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</button>
+</div>
+<script>
+        function switchRole(role) {
+            const tabs = document.querySelectorAll('.role-tab');
+            const usernameLabel = document.getElementById('role-id-label');
+            const usernameInput = document.getElementById('username');
+
+            tabs.forEach(tab => {
+                tab.classList.remove('bg-white', 'text-primary', 'active-tab');
+                tab.classList.add('text-gray-500', 'hover:bg-white/50');
+            });
+
+            const activeTab = document.getElementById(`tab-${role}`);
+            activeTab.classList.add('bg-white', 'text-primary', 'active-tab');
+            activeTab.classList.remove('text-gray-500', 'hover:bg-white/50');
+
+            if (role === 'student') {
+                usernameLabel.innerText = 'Email Étudiant';
+                usernameInput.placeholder = 'nom.prenom@ecamcongo.com';
+                usernameInput.type = 'email';
+            } else if (role === 'prof') {
+                usernameLabel.innerText = 'Matricule Professeur';
+                usernameInput.placeholder = 'p.nom@ecamcongo.com';
+                usernameInput.type = 'text';
+            } else {
+                usernameLabel.innerText = 'Identifiant Direction';
+                usernameInput.placeholder = 'admin@ecamcongo.com';
+                usernameInput.type = 'text';
+            }
+        }
+
+        // Chat Interface Logic
+        const toggleBtn = document.getElementById('ai-assistant-toggle');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatMessages = document.getElementById('chat-messages');
+
+        toggleBtn.addEventListener('click', () => {
+            chatWindow.classList.toggle('active');
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWindow.classList.remove('active');
+        });
+
+        function appendMessage(text, isUser = false) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = isUser 
+                ? "bg-primary text-white p-3 rounded-lg rounded-tr-none ml-auto max-w-[85%] text-sm shadow-sm"
+                : "bg-white border border-gray-100 p-3 rounded-lg rounded-tl-none max-w-[85%] text-sm shadow-sm";
+            msgDiv.innerText = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        sendBtn.addEventListener('click', () => {
+            const val = chatInput.value.trim();
+            if(val) {
+                appendMessage(val, true);
+                chatInput.value = '';
+                // Simulate reply
+                setTimeout(() => {
+                    appendMessage("Merci pour votre message. Je transmets votre demande au service informatique.");
+                }, 1000);
+            }
+        });
+
+        chatInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') sendBtn.click();
+        });
+
+        // Shader implementation
+        const canvas = document.getElementById('shader-canvas');
+        const gl = canvas.getContext('webgl');
+
+        if (gl) {
+            const vertexShaderSource = `
+                attribute vec2 position;
+                varying vec2 v_texCoord;
+                void main() {
+                    v_texCoord = position * 0.5 + 0.5;
+                    v_texCoord.y = 1.0 - v_texCoord.y;
+                    gl_Position = vec4(position, 0.0, 1.0);
+                }
+            `;
+
+            const fragmentShaderSource = `
+                precision highp float;
+                varying vec2 v_texCoord;
+                uniform float u_time;
+                uniform vec2 u_resolution;
+
+                float line(vec2 uv, float speed, float offset, float thickness, float blur) {
+                    float movement = u_time * speed + offset;
+                    float l = abs(uv.x - uv.y + sin(movement) * 0.5) - thickness;
+                    return smoothstep(thickness + blur, thickness, l);
+                }
+
+                void main() {
+                    vec2 uv = v_texCoord;
+                    vec3 green = vec3(0.0235, 0.251, 0.1686);
+                    float alpha = 0.0;
+                    
+                    for(float i = 0.0; i < 5.0; i++) {
+                        float beam = line(uv, 0.5 + i * 0.1, i * 1.5, 0.01, 0.15);
+                        alpha += beam * 0.3;
+                    }
+                    
+                    gl_FragColor = vec4(green, alpha);
+                }
+            `;
+
+            function createShader(gl, type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                return shader;
+            }
+
+            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            gl.useProgram(program);
+
+            const positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
+
+            const positionLocation = gl.getAttribLocation(program, 'position');
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            const timeLocation = gl.getUniformLocation(program, 'u_time');
+            const resolutionLocation = gl.getUniformLocation(program, 'u_resolution');
+
+            function render(time) {
+                time *= 0.001;
+                
+                if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+                    canvas.width = canvas.clientWidth;
+                    canvas.height = canvas.clientHeight;
+                    gl.viewport(0, 0, canvas.width, canvas.height);
+                }
+
+                gl.uniform1f(timeLocation, time);
+                gl.uniform2f(resolutionLocation, canvas.width, canvas.height);
+                gl.drawArrays(gl.TRIANGLES, 0, 6);
+                requestAnimationFrame(render);
+            }
+            requestAnimationFrame(render);
+        }
+    </script>
+</body></html>

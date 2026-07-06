@@ -1,0 +1,47 @@
+ Liste des tables (structure de base)
+	Nom de la table	Rôle / Contenu
+
+1	utilisateurs     	Authentification (email, mot de passe hashé, nom, prénom, photo de profil).
+
+2	roles	            Définit les profils : étudiant, professeur, administrateur.
+
+3	departements       	Liste des départements (Mécanique, Génie civil, Électronique, etc.).
+
+4	cours	            Tous les cours (code, intitulé, crédits ECTS, semestre, année, lien vers departements).
+
+5	affectations_prof  	Association entre un professeur et un cours pour un semestre donné (planning, salle).
+
+6	inscriptions	    Association entre un étudiant et un cours (avec la note finale, statut « en cours / validé / échec »).
+
+7	presences	        Suivi de l’assiduité (étudiant, cours, date, statut présent/absent).
+
+8	devoirs	            Travaux à rendre (titre, description, date limite, lien vers cours).
+
+9	rendus          	Dépôt des copies par les étudiants, avec la note attribuée par le professeur.
+
+10	paiements	        Transactions financières (montant, catégorie, date, méthode – espèces/chèque, lien vers inscriptions ou étudiant).
+
+11	documents_archives	Ressources partagées (sujets d’examen, corrigés, guides) avec filtre par matière, année, département.
+
+12	annonces	        Communications institutionnelles (destinées à tous, ou ciblant un rôle spécifique).
+
+
+
+
+
+
+
+
+Relations clés (schéma conceptuel)
+
+        Un utilisateur possède un role_id.
+
+        Un étudiant est un utilisateur (avec un numéro d’étudiant spécifique) ; un professeur de même.
+
+        cours → departements (clé étrangère).
+
+        affectations_prof fait le lien entre professeur et cours.
+
+        inscriptions fait le lien entre étudiant et cours (c’est la table centrale pour les notes et la scolarité).
+
+        paiements et presences sont liés à inscriptions pour éviter les doublons.

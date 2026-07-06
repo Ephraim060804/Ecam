@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+
+<html class="light" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ECAM Congo | Excellence en Ingénierie</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&amp;family=Source+Serif+4:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#fed488",
+                    "primary-container": "#06402b",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#d9e3f9",
+                    "secondary-fixed": "#ffdea5",
+                    "outline-variant": "#c0c9c1",
+                    "error": "#ba1a1a",
+                    "surface-container": "#eceef0",
+                    "on-secondary-fixed-variant": "#5d4201",
+                    "on-background": "#191c1e",
+                    "on-secondary-container": "#785a1a",
+                    "on-secondary-fixed": "#261900",
+                    "primary": "#002819",
+                    "on-surface": "#191c1e",
+                    "surface-dim": "#d8dadc",
+                    "on-primary-fixed-variant": "#1b503a",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary": "#ffffff",
+                    "background": "#f7f9fb",
+                    "primary-fixed": "#b8efd0",
+                    "on-tertiary-container": "#97a1b6",
+                    "surface-container-low": "#f2f4f6",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#77ac90",
+                    "secondary-fixed-dim": "#e9c176",
+                    "primary-fixed-dim": "#9cd2b5",
+                    "outline": "#717973",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#121c2c",
+                    "surface-tint": "#356850",
+                    "surface-bright": "#f7f9fb",
+                    "surface": "#f7f9fb",
+                    "tertiary": "#182333",
+                    "secondary": "#775a19",
+                    "surface-container-highest": "#e0e3e5",
+                    "tertiary-container": "#2e3849",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#bdc7dc",
+                    "on-primary-fixed": "#002114",
+                    "on-tertiary-fixed-variant": "#3d4759",
+                    "inverse-on-surface": "#eff1f3",
+                    "inverse-primary": "#9cd2b5",
+                    "on-surface-variant": "#404943",
+                    "surface-variant": "#e0e3e5",
+                    "inverse-surface": "#2d3133",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "15px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "base": "8px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["\"Source Serif 4\""],
+                    "body-lg": ["Hanken Grotesk"],
+                    "headline-md": ["\"Source Serif 4\""],
+                    "label-sm": ["Hanken Grotesk"],
+                    "headline-lg": ["\"Source Serif 4\""],
+                    "body-md": ["Hanken Grotesk"],
+                    "display-lg": ["\"Source Serif 4\""]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-sm": ["13px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-lg": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; background-color: #ffffff; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        .hero-image-animate {
+            animation: floatingEntry 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+        }
+
+        @keyframes floatingEntry {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 40, 25, 0.08); }
+
+        .filiere-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 0;
+            background-color: #06402b;
+            transition: height 0.3s ease;
+        }
+        .filiere-card:hover::before { height: 100%; }
+
+        .academic-grid {
+            background-image: radial-gradient(#c0c9c1 0.5px, transparent 0.5px);
+            background-size: 24px 24px;
+        }
+
+        #chat-window {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+        }
+        #chat-window.active {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-surface border-b border-outline-variant w-full top-0 sticky z-50">
+<nav class="flex justify-between items-center max-w-container-max mx-auto px-margin-desktop h-20">
+<div class="flex items-center gap-4">
+<img alt="ECAM Congo Logo" class="h-12 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZRghtbwOGF6VmSN_w-tM__4oiFtpVKHvgI2RmGItgeWqxJ21p0M10pPohyMFQT06FQlXvDWdkhO_VnvpNCNXHtPxsQfI7JAmSwTG72zEDcnDy1rZSa6hLHNcusxNVgtsm9fkUUPex9rNIXtfod7vCZTFLQReJNi7uzK9Utn9o3IRuy7sm6hkKcrhrn03c_xTxjndhyVXW5SWk0d1fhtX5FqEeaHc52VYcT07hdHdUZghZ0ZVcL9gM"/>
+<span class="font-headline-md text-headline-md font-bold text-primary">ECAM Congo</span>
+</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-body-md text-body-md text-primary border-b-2 border-primary font-bold pb-1" href="#">Filières</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Campus</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Admissions</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Recherche</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Entreprises</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-medium scale-95 active:opacity-80 transition-all">
+                S'inscrire
+            </button>
+</nav>
+</header>
+<!-- Hero Section -->
+<section class="relative overflow-hidden pt-20 pb-32 academic-grid"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 text-center pointer-events-none">
+<p class="font-display-lg text-headline-lg text-primary opacity-20 leading-tight">
+        ECAM<br/>
+<span class="text-headline-md">École Canadienne de Management</span>
+</p>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-5 z-10">
+<h1 class="font-display-lg text-display-lg text-primary mb-6">ECAM École Canadienne de Management</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
+                    Formez-vous aux métiers de demain avec l'élite de l'ingénierie au Congo. Alliez rigueur académique, innovation technologique et prestige professionnel.
+                </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:bg-on-primary-fixed-variant transition-colors">
+                        Découvrir nos programmes
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="border border-primary text-primary px-8 py-4 rounded-xl font-bold hover:bg-primary hover:text-on-primary transition-all">
+                        Visite Virtuelle
+                    </button>
+</div>
+</div>
+<div class="lg:col-span-7 relative h-[600px] hidden md:block">
+<!-- Floating Images -->
+<div class="absolute -top-10 -right-4 w-64 h-80 hero-image-animate shadow-xl" style="animation-delay: 0.1s;">
+<img alt="Étudiants ECAM" class="w-full h-full object-cover rounded-xl border-4 border-white" src="https://lh3.googleusercontent.com/aida/AP1WRLtdPa1exkk4WwsMfyj5IQHlawbArQoJzfnjhv9ZMi3JGNmIp6TSrclXqdY3SXhYiDmL1MkQQtcbXIVRYNuypAw5-rI7OLCNgdA0nWzqj5rYiCyB_57jMJ81mPoo3LL0ZhtqS-t_hUr8ID3iJviyFsnWNvuSnlYqVDrRmhwTYzQ--SI07vafpeuKmhfM_VKDZENKzAKLwodaBNFUAU_Qp-gVcjt3YhpSYKgn2CiG5eAqT8i_fwJboAgasdc"/>
+</div>
+<div class="absolute top-10 -left-12 w-72 h-56 hero-image-animate shadow-2xl z-20" style="animation-delay: 0.3s;">
+<img alt="Ingénierie précision" class="w-full h-full object-cover rounded-xl border-4 border-white" src="https://lh3.googleusercontent.com/aida/AP1WRLtVJ0ceVmMV8kyv4D7rKpYwXLvDrz5ytL2rWe2wcyUHhx02dnFAKgADWTKRA61tx8WlcdKxNwd3-AGE6xTGfgPMC-j6aPRPRa8KlTMO41ucW2F8K2KPazgHJ2HWvbLA5MSKZ0-kil-zLAFd9HWIHIbDCK1ykhUGOebr--TYf5Vh9nKY-Kdxx3_FGEQNhdhikvyRuXOZ8MWaEwx582B8URxESboi6g9H_LbQolqGFOmKHeMAWi4OTRlL5xw"/>
+</div>
+<div class="absolute -bottom-16 -right-12 w-80 h-60 hero-image-animate shadow-lg" style="animation-delay: 0.5s;">
+<img alt="Visite industrielle" class="w-full h-full object-cover rounded-xl border-4 border-white" src="https://lh3.googleusercontent.com/aida/AP1WRLtJ0xyPWNVpYnyBaTcHoA3J9eriiWa6iGF8yvTe0SCbIDzDut4jNX0Z0Wkkc6iZpVrbE3XGKX6KCK7XunsFM7-woE1cG1ofFgbO69hlQIM56BESOhHEOac_a_20sUyTET8flw9H8uoo1yEZNP9FJRQ4Fm4xhYUjNShJ17xYxooOa91nTUfRn0UjofLo7hQu8x27QDguhr5t9yKqzgIl-8n3qG5c0YOBii8dxmURdBpz45qo3Bu9jMZKsjI"/>
+</div>
+<div class="absolute bottom-32 left-10 w-56 h-72 hero-image-animate shadow-xl z-10" style="animation-delay: 0.7s;">
+<img alt="Campus Moderne" class="w-full h-full object-cover rounded-xl border-4 border-white" src="https://lh3.googleusercontent.com/aida/AP1WRLvM79liOqyTNLE1IN5ZLdAAO6Px3XxT_5caTPb47o3ikiuDRL0O5DjARTJRUu4x7g-Qy_vZtsAHCSc_WCvRNYgCyMI0B0g2vuSIkFkU1bjAHHaG9kFalOZESGCdTKHygHiLMmad9BXOeO4w0sPseNQq-H1qb5nwR5NoQvtVoBQrExSul4kSXbPBpVvaeTevbo_QcVjNcBTKowjt8JStkRSdY8UtTY5GFcxibbTLIS87NkUxrLbzRB-8mBM"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Nos Filières Section -->
+<section class="py-24 bg-surface-container-lowest relative"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 text-center pointer-events-none">
+<p class="font-display-lg text-headline-lg text-primary opacity-20 leading-tight">
+        ECAM<br/>
+<span class="text-headline-md">École Canadienne de Management</span>
+</p>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop relative z-10">
+<div class="flex items-end justify-between mb-16">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Nos filières</h2>
+<div class="h-1 w-24 bg-primary"></div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm hidden md:block">
+                    Des cursus d'ingénieurs conçus en partenariat avec les plus grandes industries mondiales.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Filière 1 -->
+<div class="filiere-card hover-lift relative bg-white p-8 border border-outline-variant rounded-xl overflow-hidden group cursor-pointer transition-all duration-700">
+<div class="flex items-center gap-4 mb-6">
+<div class="p-3 bg-primary-fixed text-primary rounded-lg">
+<span class="material-symbols-outlined">settings_suggest</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Génie industriel</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                        Optimisez les processus et menez les transformations technologiques dans les secteurs manufacturiers.
+                    </p>
+<div class="flex items-center text-primary font-bold group-hover:translate-x-2 transition-transform">
+                        Voir les détails <span class="material-symbols-outlined ml-2">east</span>
+</div>
+</div>
+<!-- Filière 2 -->
+<div class="filiere-card hover-lift relative bg-white p-8 border border-outline-variant rounded-xl overflow-hidden group cursor-pointer transition-all duration-700">
+<div class="flex items-center gap-4 mb-6">
+<div class="p-3 bg-secondary-fixed text-secondary rounded-lg">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Génie électrique</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                        Maîtrisez les énergies du futur et les systèmes intelligents pour un Congo durable.
+                    </p>
+<div class="flex items-center text-primary font-bold group-hover:translate-x-2 transition-transform">
+                        Voir les détails <span class="material-symbols-outlined ml-2">east</span>
+</div>
+</div>
+<!-- Filière 3 -->
+<div class="filiere-card hover-lift relative bg-white p-8 border border-outline-variant rounded-xl overflow-hidden group cursor-pointer transition-all duration-700">
+<div class="flex items-center gap-4 mb-6">
+<div class="p-3 bg-tertiary-fixed text-tertiary rounded-lg">
+<span class="material-symbols-outlined">code</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary">Génie informatique</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                        Développez les solutions logicielles et l'IA pour répondre aux défis numériques de l'Afrique.
+                    </p>
+<div class="flex items-center text-primary font-bold group-hover:translate-x-2 transition-transform">
+                        Voir les détails <span class="material-symbols-outlined ml-2">east</span>
+</div>
+</div>
+<!-- Filière 4 (Et autres domaines) -->
+<div class="filiere-card hover-lift relative bg-surface-container-low p-8 border border-outline-variant rounded-xl overflow-hidden group cursor-pointer transition-all duration-700 flex flex-col justify-center items-center text-center">
+<div class="mb-4">
+<span class="material-symbols-outlined text-primary text-4xl">add_circle</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Et autres domaines...</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Découvrez l'ensemble de nos programmes de management et spécialisations.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Assistant IA & Chat Interface -->
+<div class="fixed right-6 bottom-6 flex flex-col items-end gap-4 z-50">
+<div class="w-80 h-[450px] bg-white rounded-2xl shadow-2xl border border-outline-variant overflow-hidden flex flex-col" id="chat-window">
+<div class="bg-primary p-4 flex items-center justify-between text-on-primary">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-bold">Assistant ECAM</span>
+</div>
+<button class="hover:bg-on-primary/20 rounded-full p-1 transition-colors" id="close-chat">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 p-4 overflow-y-auto space-y-4 bg-surface-container-lowest">
+<div class="bg-surface-container p-3 rounded-lg rounded-tl-none max-w-[85%] text-body-md">
+                    Bonjour ! Je suis l'assistant IA d'ECAM Congo. Comment puis-je vous aider aujourd'hui ?
+                </div>
+</div>
+<div class="p-4 border-t border-outline-variant bg-white">
+<div class="relative">
+<input class="w-full bg-surface-container-low border-none rounded-full py-2.5 px-4 pr-12 text-body-md focus:ring-2 focus:ring-primary" placeholder="Posez votre question..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-14 h-14 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all" id="ai-assistant">
+<span class="material-symbols-outlined text-2xl">smart_toy</span>
+</button>
+</div>
+<!-- Footer -->
+<footer class="bg-primary text-on-primary w-full border-t border-primary-container">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter max-w-container-max mx-auto px-margin-desktop py-20">
+<div>
+<div class="flex items-center gap-4 mb-8">
+<img alt="ECAM Logo" class="h-10 brightness-0 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZRghtbwOGF6VmSN_w-tM__4oiFtpVKHvgI2RmGItgeWqxJ21p0M10pPohyMFQT06FQlXvDWdkhO_VnvpNCNXHtPxsQfI7JAmSwTG72zEDcnDy1rZSa6hLHNcusxNVgtsm9fkUUPex9rNIXtfod7vCZTFLQReJNi7uzK9Utn9o3IRuy7sm6hkKcrhrn03c_xTxjndhyVXW5SWk0d1fhtX5FqEeaHc52VYcT07hdHdUZghZ0ZVcL9gM"/>
+<span class="font-headline-md text-headline-md text-on-primary">ECAM Congo</span>
+</div>
+<p class="font-body-md text-body-md opacity-80 max-w-xs mb-8">
+                    L'école de référence pour les futurs cadres industriels de la République du Congo.
+                </p>
+</div>
+<div>
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-secondary-fixed mb-8">Navigation</h4>
+<ul class="space-y-4">
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-container transition-colors" href="#">Mentions Légales</a></li>
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-container transition-colors" href="#">Contact</a></li>
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-container transition-colors" href="#">Plan du site</a></li>
+<li><a class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-container transition-colors" href="#">Admissions 2024</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-sm text-label-sm uppercase tracking-widest text-secondary-fixed mb-8">Suivez-nous</h4>
+<div class="flex gap-4 mb-8">
+<a class="w-10 h-10 rounded-full border border-on-primary/20 flex items-center justify-center hover:bg-on-primary/10 transition-all" href="#">
+<span class="material-symbols-outlined text-on-primary">link</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-on-primary/20 flex items-center justify-center hover:bg-on-primary/10 transition-all" href="#">
+<span class="material-symbols-outlined text-on-primary">public</span>
+</a>
+</div>
+<div class="font-body-md text-body-md space-y-2 opacity-80">
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">location_on</span> Brazzaville, Campus 1</p>
+<p class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">mail</span> contact@ecamcongo.com</p>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-desktop py-8 border-t border-on-primary/10 flex flex-col md:flex-row justify-between items-center opacity-60">
+<p class="font-body-md text-body-md">© 2024 ECAM Congo. Tous droits réservés.</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="hover:text-white transition-colors" href="#">LinkedIn</a>
+<a class="hover:text-white transition-colors" href="#">Facebook</a>
+<a class="hover:text-white transition-colors" href="#">Instagram</a>
+</div>
+</div>
+</footer>
+<script>
+        // AI Assistant Logic
+        const aiWidget = document.getElementById('ai-assistant');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+
+        aiWidget.addEventListener('click', () => {
+            chatWindow.classList.toggle('active');
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatWindow.classList.remove('active');
+        });
+
+        // Hide chat on scroll down, show on scroll up (optional UX)
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            let st = window.pageYOffset || document.documentElement.scrollTop;
+            if (st > lastScrollTop && st > 100) {
+                // Scroll Down
+                if (!chatWindow.classList.contains('active')) {
+                    aiWidget.style.transform = 'translateY(100px)';
+                    aiWidget.style.opacity = '0.5';
+                }
+            } else {
+                // Scroll Up
+                aiWidget.style.transform = 'translateY(0)';
+                aiWidget.style.opacity = '1';
+            }
+            lastScrollTop = st <= 0 ? 0 : st;
+        }, false);
+
+        // Scroll Reveal logic for cards
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100');
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.filiere-card').forEach(card => {
+            card.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700');
+            observer.observe(card);
+        });
+    </script>
+</body></html>
