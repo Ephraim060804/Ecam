@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block titre %}Ajouter un document · ECAM{% endblock %}
+{% block ecam %}
+<form class="carte carte-etroite" method="post" enctype="multipart/form-data">
+    <h1>Ajouter un document</h1>
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    <label>Titre<input class="champ" name="titre" required maxlength="150"></label>
+    <label>Matière<input class="champ" name="matiere" maxlength="100"></label>
+    <label>Filière<select class="champ" name="filiere_id"><option value="">Toutes</option>{% for f in filieres %}<option value="{{ f.id }}">{{ f.code }}</option>{% endfor %}</select></label>
+    <label>Année<select class="champ" name="annee">{% for a in range(annee_courante, annee_courante - 10, -1) %}<option>{{ a }}</option>{% endfor %}</select></label>
+    <label>Fichier PDF (20 Mo maximum)<input class="champ" name="fichier" type="file" accept="application/pdf" required></label>
+    <button class="btn" type="submit">Enregistrer</button>
+</form>
+{% endblock %}

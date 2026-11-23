@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chatbot.css') }}">
+<div id="ecb">
+  <button id="ecb-toggle" type="button" aria-expanded="false" aria-controls="ecb-panel"><i class="fas fa-comments"></i><span>Besoin d’aide ?</span></button>
+  <section id="ecb-panel" hidden aria-label="Assistant ECAM">
+    <header>Assistant ECAM</header>
+    <div id="ecb-log" aria-live="polite">
+      <div class="ecb-msg ecb-bot">Bonjour ! Choisissez un sujet ou posez votre question.</div>
+    </div>
+    <div class="ecb-chips">
+      <button type="button" class="ecb-chip" data-topic="inscription">Inscription</button>
+      <button type="button" class="ecb-chip" data-topic="formations">Formations</button>
+      <button type="button" class="ecb-chip" data-topic="emploi">Emploi du temps</button>
+      <button type="button" class="ecb-chip" data-topic="resultats">Résultats</button>
+      <button type="button" class="ecb-chip" data-topic="paiements">Paiements</button>
+      <button type="button" class="ecb-chip" data-topic="bibliotheque">Bibliothèque</button>
+      <button type="button" class="ecb-chip ecb-chip-dir" data-topic="directeur">Écrire au directeur d’études</button>
+    </div>
+    <form id="ecb-form" autocomplete="off">
+      <input id="ecb-input" maxlength="500" placeholder="Votre question…" aria-label="Votre message">
+      <button type="submit" aria-label="Envoyer"><i class="fas fa-paper-plane"></i></button>
+    </form>
+  </section>
+</div>
+<script>window.ECAM_BOT = {csrf: "{{ csrf_token }}", connecte: {{ 'true' if user else 'false' }}, urlConnexion: "{{ url_for('connexion') }}"};</script>
+<script src="{{ url_for('static', filename='js/chatbot.js') }}" defer></script>

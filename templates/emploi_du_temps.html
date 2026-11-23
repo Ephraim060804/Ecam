@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block titre %}Emploi du temps · ECAM{% endblock %}
+{% set jours = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}
+{% block ecam %}
+<section class="carte entete-page"><h1>Emploi du temps</h1>
+{% if user.role != 'etudiant' %}
+<form method="get"><select class="champ" name="classe_id" onchange="this.form.submit()"><option value="">Choisir une classe…</option>
+{% for c in classes %}<option value="{{ c.id }}" {{ 'selected' if c.id == classe_id }}>{{ c.nom }}</option>{% endfor %}</select></form>
+{% endif %}</section>
+<section class="carte">
+{% if creneaux %}
+<div class="defile"><table class="tableau"><tr><th>Horaire</th>{% for j in jours %}<th>{{ j }}</th>{% endfor %}</tr>
+{% for c in creneaux %}<tr><td>{{ c[0].strftime('%Hh%M') }} – {{ c[1].strftime('%Hh%M') }}</td>
+  {% for j in range(1, 7) %}<td>{% for e in grille.get((c, j), []) %}{{ e.cours }}<br><b>{{ e.prof or '' }}</b>{% if e.salle %} · {{ e.salle }}{% endif %}{% endfor %}</td>{% endfor %}</tr>{% endfor %}
+</table></div>
+{% else %}<p class="vide">Aucun cours planifié pour cette classe.</p>{% endif %}
+</section>
+{% endblock %}

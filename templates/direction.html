@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block titre %}Direction · ECAM{% endblock %}
+{% block ecam %}
+<section class="stats">
+    <div class="stat"><i class="fas fa-user-graduate"></i><p>Étudiants</p><strong>{{ stats.etudiants }}</strong></div>
+    <div class="stat"><i class="fas fa-chalkboard-teacher"></i><p>Enseignants</p><strong>{{ stats.enseignants }}</strong></div>
+    <div class="stat"><i class="fas fa-book"></i><p>Documents à valider</p><strong><a style="color:#fff" href="{{ url_for('bibliotheque') }}">{{ stats.docs }}</a></strong></div>
+</section>
+<section class="grille-2">
+<form class="carte carte-etroite" method="post" action="{{ url_for('dir_matiere') }}"><h2>Matière et enseignant</h2>
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    <label>Nom<input class="champ" name="nom" required></label>
+    <label>Classe<select class="champ" name="classe_id" required><option value="">Choisir…</option>{% for c in classes %}<option value="{{ c.id }}">{{ c.nom }}</option>{% endfor %}</select></label>
+    <label>Semestre<select class="champ" name="semestre_id" required>{% for s in semestres %}<option value="{{ s.id }}">{{ s.nom }}</option>{% endfor %}</select></label>
+    <label>Coefficient<input class="champ" name="coefficient" value="1" inputmode="decimal" required></label>
+    <label>Crédits<input class="champ" name="credits" type="number" min="0" value="3" required></label>
+    <label>Enseignant (année en cours)<select class="champ" name="enseignant_id"><option value="">Aucun pour l’instant</option>{% for e in enseignants %}<option value="{{ e.id }}">{{ e.nom }}</option>{% endfor %}</select></label>
+    <button class="btn">Enregistrer la matière</button></form>
+<form class="carte carte-etroite" method="post" action="{{ url_for('dir_emploi') }}"><h2>Emploi du temps</h2>
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    <label>Matière<select class="champ" name="matiere_id" required><option value="">Choisir…</option>{% for m in matieres %}<option value="{{ m.id }}">{{ m.nom }}</option>{% endfor %}</select></label>
+    <label>Jour<select class="champ" name="jour">{% for j in ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'] %}<option value="{{ loop.index }}">{{ j }}</option>{% endfor %}</select></label>
+    <label>Début<input class="champ" type="time" name="debut" required></label>
+    <label>Fin<input class="champ" type="time" name="fin" required></label>
+    <label>Salle<input class="champ" name="salle" maxlength="30"></label>
+    <button class="btn">Ajouter le cours</button></form>
+<form class="carte carte-etroite" method="post" action="{{ url_for('dir_resultats') }}"><h2>Accès aux résultats</h2>
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    <label>Classe<select class="champ" name="classe_id" required><option value="">Choisir…</option>{% for c in classes %}<option value="{{ c.id }}">{{ c.nom }}</option>{% endfor %}</select></label>
+    <label>Action<select class="champ" name="autorise"><option value="1">Autoriser l’affichage des notes</option><option value="0">Masquer les notes</option></select></label>
+    <button class="btn">Appliquer à la classe</button></form>
+<form class="carte carte-etroite" method="post" action="{{ url_for('dir_type_paiement') }}"><h2>Type de paiement</h2>
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    <label>Nom (ex. Scolarité)<input class="champ" name="nom" maxlength="40" required></label>
+    <label>Montant (FCFA)<input class="champ" name="montant" inputmode="numeric" required></label>
+    <label>Obligatoire<select class="champ" name="obligatoire"><option value="1">Oui</option><option value="0">Non</option></select></label>
+    <button class="btn">Enregistrer le type</button></form>
+<form class="carte carte-etroite" method="post" action="{{ url_for('dir_paiement') }}"><h2>Enregistrer un paiement</h2>
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    <label>Matricule<input class="champ" name="matricule" required></label>
+    <label>Type<select class="champ" name="type_paiement_id" required><option value="">Choisir…</option>{% for t in types %}<option value="{{ t.id }}">{{ t.nom }}</option>{% endfor %}</select></label>
+    <label>Montant (FCFA)<input class="champ" name="montant" inputmode="numeric" required></label>
+    <label>Mode<select class="champ" name="mode_paie"><option value="especes">Espèces</option><option value="mobile_money">Mobile money</option><option value="virement">Virement</option><option value="cheque">Chèque</option></select></label>
+    <button class="btn">Enregistrer le paiement</button></form>
+<form class="carte carte-etroite" method="post" action="{{ url_for('dir_message') }}"><h2>Message à un étudiant</h2>
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    <label>Matricule<input class="champ" name="matricule" required></label>
+    <label>Sujet<input class="champ" name="sujet" maxlength="80"></label>
+    <label>Message<textarea class="champ" name="message" rows="4" maxlength="1000" required></textarea></label>
+    <button class="btn">Envoyer</button></form>
+</section>
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titre %}ECAM{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ecam.css') }}">
+</head>
+<body>
+    <header class="entete-site">
+        <nav>
+            <a href="{{ url_for('accueil') }}"><i class="fas fa-home"></i> Accueil</a>
+            <a href="{{ url_for('formations') }}"><i class="fas fa-graduation-cap"></i> Formations</a>
+            {% if user %}
+            <a href="{{ url_for('dashboard') }}"><i class="fas fa-gauge"></i> Mon espace</a>
+            {% if user.role != 'enseignant' %}<a href="{{ url_for('emploi_du_temps') }}"><i class="fas fa-calendar-alt"></i> Emploi du temps</a>{% endif %}
+            <a href="{{ url_for('bibliotheque') }}"><i class="fas fa-book-open"></i> Bibliothèque</a>
+            <a href="{{ url_for('notifications') }}"><i class="fas fa-bell"></i> Messages{% if non_lues %} <span class="pastille">{{ non_lues }}</span>{% endif %}</a>
+            <form method="post" action="{{ url_for('deconnexion') }}"><input type="hidden" name="csrf" value="{{ csrf_token }}"><button class="lien-bouton"><i class="fas fa-right-from-bracket"></i> Quitter</button></form>
+            {% else %}
+            <a href="{{ url_for('portail') }}"><i class="fas fa-user-plus"></i> S’inscrire</a>
+            <a href="{{ url_for('connexion') }}"><i class="fas fa-right-to-bracket"></i> Se connecter</a>
+            {% endif %}
+        </nav>
+    </header>
+    {% with msgs = get_flashed_messages(with_categories=true) %}
+      {% for cat, m in msgs %}<p class="flash {{ cat }}" role="status">{{ m }}</p>{% endfor %}
+    {% endwith %}
+    <main class="container">
+        {% block ecam %}{% endblock %}
+    </main>
+    {% include '_chatbot.html' %}
+</body>
+</html>

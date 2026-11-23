@@ -1,0 +1,62 @@
+/* ECAM — charte verte (couleurs reprises du site d'origine) */
+:root{
+  --nuit:#083901; --vert:#087f02; --vif:#05e02a; --lime:#bdfa15;
+  --menthe:#dcf8d8; --menthe-2:#c5f2c5; --texte:#16210f; --gris:#5b6657;
+  --erreur:#a4160f; --rayon:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Inter','Segoe UI',system-ui,sans-serif;color:var(--texte);background:#f4faf3;line-height:1.5}
+a{color:var(--vert)}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+.entete-site{background:linear-gradient(135deg,var(--nuit) 0%,var(--vert) 60%,var(--lime) 100%);padding:10px;display:flex;justify-content:center}
+.entete-site nav{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;padding:8px 14px;border:1px solid rgba(255,255,255,.2);border-radius:var(--rayon);background:rgba(255,255,255,.18)}
+.entete-site a,.lien-bouton{color:#fff;text-decoration:none;font:inherit;display:flex;gap:6px;align-items:center}
+.entete-site a:hover,.lien-bouton:hover{color:var(--lime)}
+.lien-bouton{background:none;border:0;cursor:pointer;padding:0}
+.entete-site form{margin:0}
+.pastille{background:var(--lime);color:var(--nuit);border-radius:99px;padding:0 7px;font-size:.8rem;font-weight:700}
+.container{max-width:1100px;margin:24px auto;padding:0 16px;display:grid;gap:20px}
+.flash{max-width:1100px;margin:14px auto 0;padding:10px 14px;border-radius:10px;background:var(--menthe);border:1px solid var(--vert)}
+.flash.erreur{background:#fde8e6;border-color:var(--erreur);color:var(--erreur)}
+.carte{background:#fff;border:1px solid var(--menthe-2);border-bottom:3px solid var(--vert);border-radius:var(--rayon);padding:20px}
+.carte h1,.carte h2{margin:0 0 12px;color:var(--nuit)}
+.carte h2 i{color:var(--vert);margin-right:6px}
+.carte-etroite{max-width:460px;margin:0 auto;width:100%;display:grid;gap:14px}
+.carte-etroite label{display:grid;gap:4px;font-weight:600;font-size:.92rem}
+.champ{width:100%;padding:10px 12px;border:1px solid #9bc79a;border-radius:10px;font:inherit;background:#fff}
+.btn{display:inline-flex;gap:8px;align-items:center;justify-content:center;padding:10px 18px;border:0;border-radius:10px;background:var(--vert);color:#fff;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--nuit)}
+.btn-clair{background:var(--menthe);color:var(--nuit)}
+.btn-clair:hover{background:var(--menthe-2)}
+.aide,.vide{color:var(--gris);margin:0;font-size:.92rem}
+.profils{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.profil{display:grid;gap:4px;justify-items:center;padding:14px;border:2px solid var(--menthe-2);border-radius:var(--rayon);background:#fff;font:inherit;cursor:pointer;color:var(--nuit)}
+.profil i{font-size:1.6rem;color:var(--vert)}
+.profil.actif{border-color:var(--vert);background:var(--menthe)}
+.entete-page{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.stat{background:var(--nuit);color:#fff;border-radius:var(--rayon);padding:18px}
+.stat i{color:var(--lime)}
+.stat p{margin:6px 0 2px;opacity:.85}
+.stat strong{font-size:1.6rem}
+.grille-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px}
+.defile{overflow-x:auto}
+.tableau{width:100%;border-collapse:collapse}
+.tableau th{background:var(--vert);color:#fff;text-align:left;padding:9px 10px}
+.tableau td{padding:9px 10px;border-bottom:1px solid var(--menthe-2);vertical-align:top}
+.tableau tr:nth-child(even) td{background:#f4faf3}
+.tableau b{color:var(--vert)}
+.mois{display:flex;flex-wrap:wrap;gap:8px}
+.mois span{padding:6px 12px;border-radius:99px;background:#eef1ec;color:var(--gris)}
+.mois .paye{background:var(--menthe);color:var(--nuit);font-weight:600}
+.recherche{display:flex;gap:10px;flex-wrap:wrap}
+.recherche .champ{flex:1 1 240px;width:auto}
+.ligne-valid{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0}
+.ligne-valid span{flex:1 1 200px}
+.message{border-left:4px solid var(--menthe-2);padding:8px 14px;margin:10px 0}
+.message.non-lu{border-color:var(--vert);background:var(--menthe)}
+.message h3{margin:0}.message p{margin:4px 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* l'attribut hidden doit toujours masquer l'élément (sinon label{display:grid} le réaffiche) */
+[hidden] { display: none !important; }

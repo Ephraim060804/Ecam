@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block titre %}Espace enseignant · ECAM{% endblock %}
+{% block ecam %}
+<section class="carte"><h1>Bonjour {{ user.prenom }}</h1>
+{% if mats %}
+<div class="defile"><table class="tableau"><tr><th>Matière</th><th>Classe</th><th>Semestre</th><th></th></tr>
+{% for m in mats %}<tr><td>{{ m.nom }}</td><td>{{ m.classe }}</td><td>{{ m.semestre }}</td>
+<td><a class="btn" href="{{ url_for('saisie', mid=m.id) }}">Notes et présences</a></td></tr>{% endfor %}</table></div>
+{% else %}<p class="vide">Aucune matière ne vous est encore affectée. La direction doit d’abord vous l’attribuer ; vous pouvez le lui demander avec le bouton « Écrire au directeur d’études » en bas de page.</p>{% endif %}
+</section>
+{% endblock %}

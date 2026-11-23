@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block titre %}Messages · ECAM{% endblock %}
+{% block ecam %}
+<section class="carte"><h1>Messages</h1>
+{% for m in msgs %}<article class="message {{ '' if m.lu else 'non-lu' }}"><h3>{{ m.titre }}</h3><p>{{ m.message }}</p><small>{{ m.date_envoi.strftime('%d/%m/%Y %Hh%M') }}</small></article>
+{% else %}<p class="vide">Aucun message pour le moment.</p>{% endfor %}
+</section>
+{% endblock %}

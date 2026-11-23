@@ -1,0 +1,252 @@
+
+{% extends "base.html" %}
+
+{% block ecam %}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+        <title>Ecam</title>
+        <style>
+            .bloc-formation{
+                display: flex;justify-content: center;gap: 40px;flex-wrap: wrap;margin: 40px auto;
+            }
+
+            .les_formation{
+                text-align: center;background-color: rgba(255,255,255,0.20);
+                padding: 10px;border-radius: 20px;width: 300px;
+                height: auto;flex-wrap: wrap;
+                border-bottom: 3px solid #139902;transition: all 1s ease-in-out;border-top: 1px solid rgba(255,255,255,19);
+            }
+
+            .les_formation .icon {
+                background-color: white;border-radius: 10px;width: 50px;height: 50px;
+                display: flex;justify-content: center;align-items: center;
+                color: #087f02;font-size: 30px;border: 1px solid greenyellow;transition: all 1s ease;
+            }
+            
+            .les_formation h3, p{
+                font-family: 'Inter';
+            }
+
+            .les_formation .icon:hover{
+                border: 2px solid greenyellow;background-color: #083901;color: greenyellow;cursor: pointer;
+            }
+            .les_formation:hover{
+                transform: scale(0.9);cursor: pointer;
+            }
+            .licence_pro{
+                gap: 30px;background-color: #dcf8d8;padding: 10px ;border-radius: 20px;width: auto;
+                height: auto;display: flex;justify-content: center;flex-wrap: wrap;
+
+            }
+            .master{
+                gap: 30px;
+                background-color: #bbf4b2;padding: 10px ;
+                border-radius: 20px;width: auto;height: auto;
+                display: flex;justify-content: center;flex-wrap: wrap;
+
+            }
+            .ingenieure{gap: 30px;
+                background-color: #aef8a3;padding: 10px ;
+                border-radius: 20px;width: auto;
+                height: auto;display: flex;justify-content: center;flex-wrap: wrap;
+            }
+            .bloc-formation h2{
+                font-family: fantasy;color: #083901;
+                background-color: rgba(255,255,255,0.20);border: 1px solid rgba(255,255,255,19);
+                padding: 10px;border-radius: 50px;text-shadow: 3px 0px 10px white;display: inline-block;
+
+            }
+            .bloc-formation .titre-formation p{
+                text-decoration: 2px underline;
+                display: flex;justify-content: center;margin: 0 auto;color: #139902;text-align: center; 
+            }
+            .text{
+                display: flex;justify-content: center;
+                flex-direction: column;margin-top: 20px;
+                padding: 10px;border-radius: 30px;background-color:#aef8a3;
+            }
+            .text h2, h4{
+                display: flex;justify-content: center;font-family: 'Inter'; 
+            }
+            .licence_pro, .master, .ingenieure{
+                box-shadow: 3px 3px 50px rgba(21, 21, 21, 0.2);
+            }
+            .inscription{
+                display: grid;
+                justify-content: center;background-color: #083901;
+                border-radius: 20px;border: 1px solid green;padding: 15px;
+                width: 200px;margin: 30px auto;transition: transform 1s ease;
+            }
+            .inscription a{
+            font-family: 'Inter';text-decoration: none;color: white;
+            }
+            .inscription:hover  {
+                transform: translateY(-9px);
+                cursor: pointer;color: #139902;border: 2px solid yellowgreen ;
+            }
+
+
+        </style>
+    </head>
+            <body>
+                
+                <div class="text">
+                    <h2>Formations</h2>
+                    <h4>Formez-vous, évoluez, réussissez.</h4>
+                </div>
+
+                <div class="bloc-formation">
+
+                    <div class="licence_pro">
+
+                        <div class="titre-formation">
+                            <h2>Licence professionnelle</h2>
+                            <p>Proposée sur les campus de Pointe-Noire et Brazzaville</p>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <h3>Comptabilité, Contrôle & Audit</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>Gestion Commerciale & Marketing</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h3>Transport & Logistique</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Gestion des Ressources Humaines</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h3>Fiscalité & Droit des Affaires</h3>
+                        </div>
+                    </div>
+
+
+                    <div class="master">
+
+                        <div class="titre-formation">
+                            <h2>Master délocalisé</h2>
+                            <p>Proposé par nos partenaires européens de la FEDE</p>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3>Management des Ressources Humaines</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <h3>Management & Stratégie Financière</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <h3>Juriste d'Entreprise</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-globe-europe"></i>
+                            </div>
+                            <h3>Spécialité Droit Européen & International des Affaires</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-leaf"></i>
+                            </div>
+                            <h3>Management Opérationnel du Développement Durable</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-boxes"></i>
+                            </div>
+                            <h3>Supply Chain Management</h3>
+                        </div>
+                    </div>
+
+
+                    <div class="ingenieure">
+                        
+                        <div class="titre-formation">
+                            <h2>Licence professionnelle en Sciences de l'Ingénieur & Technologie</h2>
+                            <p>Des formations techniques adaptées aux enjeux industriels et technologiques</p>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3>Génie Informatique & Intelligence Artificielle</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3>Génie Industriel & Maintenance des Systèmes Pluritechniques</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3>Génie Électrique & Informatique Industrielle</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <h3>Génie des Procédés Industriels & Ingénierie de l'Environnement</h3>
+                        </div>
+
+                        <div class="les_formation">
+                            <div class="icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3>Qualité, Hygiène, Sécurité & Environnement</h3>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="inscription">
+                    <a href="{{ url_for('portail') }}">S'inscrire</a>
+                </div>
+
+                <div class="bot">
+                    
+                </div>
+            </body>
+    </html>        
+{% endblock %}    

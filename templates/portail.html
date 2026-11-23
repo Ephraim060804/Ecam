@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block titre %}Portail · ECAM{% endblock %}
+{% block ecam %}
+<form class="carte carte-etroite" method="post" action="{{ url_for('inscription') }}">
+    <h1>Créer mon compte</h1>
+    <input type="hidden" name="csrf" value="{{ csrf_token }}">
+    {% set role = form.get('role', 'etudiant') %}
+    <input type="hidden" name="role" id="role" value="{{ role }}">
+    <div class="profils" role="group" aria-label="Votre profil">
+        <button type="button" class="profil {{ 'actif' if role == 'etudiant' }}" data-role="etudiant"><i class="fas fa-user-graduate"></i>Étudiant</button>
+        <button type="button" class="profil {{ 'actif' if role == 'enseignant' }}" data-role="enseignant"><i class="fas fa-chalkboard-teacher"></i>Professeur</button>
+    </div>
+    <p class="aide">Les comptes de la direction sont créés par l’administration.</p>
+    <label>Nom<input class="champ" name="nom" required maxlength="50" value="{{ form.get('nom', '') }}"></label>
+    <label>Prénom<input class="champ" name="prenom" required maxlength="50" value="{{ form.get('prenom', '') }}"></label>
+    <label>Téléphone<input class="champ" name="telephone" type="tel" required autocomplete="tel" placeholder="+242 06 123 45 67" value="{{ form.get('telephone', '') }}"></label>
+    <label id="bloc-classe" {% if role != 'etudiant' %}hidden{% endif %}>Classe
+        <select class="champ" name="classe_id" id="classe_id" {% if role == 'etudiant' %}required{% endif %}>
+            <option value="">Choisir ma classe…</option>
+            <optgroup label="Classes de l’école">
+                {% for c in classes if c.groupe %}<option value="{{ c.id }}" {{ 'selected' if form.get('classe_id') == c.id|string }}>{{ c.nom }}</option>{% endfor %}
+            </optgroup>
+            <optgroup label="Par niveau et filière">
+                {% for c in classes if not c.groupe %}<option value="{{ c.id }}" {{ 'selected' if form.get('classe_id') == c.id|string }}>{{ c.nom }}</option>{% endfor %}
+            </optgroup>
+        </select>
+    </label>
+    <label>Mot de passe (8 caractères minimum)<input class="champ" name="mot_de_passe" type="password" minlength="8" required autocomplete="new-password"></label>
+    <button class="btn" type="submit">Créer mon compte</button>
+    <p class="aide">Déjà inscrit ? <a href="{{ url_for('connexion') }}">Se connecter</a></p>
+</form>
+<script>
+function afficherProfil(role) {
+    document.querySelectorAll('.profil').forEach(x => x.classList.toggle('actif', x.dataset.role === role));
+    document.getElementById('role').value = role;
+    const bloc = document.getElementById('bloc-classe'), sel = document.getElementById('classe_id');
+    bloc.hidden = role !== 'etudiant';
+    sel.required = role === 'etudiant';
+    sel.disabled = role !== 'etudiant';          // un champ désactivé n'est pas envoyé
+}
+document.querySelectorAll('.profil').forEach(b => b.addEventListener('click', () => afficherProfil(b.dataset.role)));
+afficherProfil(document.getElementById('role').value);
+</script>
+{% endblock %}

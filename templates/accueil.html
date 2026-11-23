@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <title>ECAM</title>
+    <style>
+            header{
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(135deg, #083901 0%, #087f02 50%, #bdfa15 100%);
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border-right: 2px solid rgb(249, 156, 156);
+          
+        }
+         .Lien{
+            display: flex;
+            justify-content: center;
+            border:1px solid rgb(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 6px;
+            margin: 0px;
+            background-color:rgba(255,255,255,0.20);
+            font-size: 17px;
+            font-family: 'inter';
+            transition: transform 1s ease;
+         }
+         .Lien a{
+            text-decoration: none;
+            color: white;
+            
+         }
+         .Lien a:hover{
+            border-radius: 10px;
+            padding: 3px;
+            color: #bdfa15;
+            
+         }
+        .Lien nav{
+            display: flex;
+            gap: 20px;
+         }
+        nav a{
+            gap: 8px;
+            display: flex;
+         }
+
+
+        .logo{
+            display: flex;
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 10px 0;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        .contener{
+            display: flex;
+            gap: 50px;
+            background-color: rgba(16, 16, 16, 0.2);
+            border-radius: 20px;
+        }
+
+       
+        .slide-text {
+            max-width: 800px;      
+            margin: 50px auto;     
+            overflow: hidden;      
+            border-radius: 20px;
+            font-family: 'inter';
+            padding: 20px;
+            background: #f9fbf9;
+            border-bottom:4px solid green;
+           
+        }
+
+        .text {
+            display: flex;       
+            gap: 0;  
+                          
+        }
+
+        .description {
+            min-width: 100%;      
+            flex-shrink: 0;        
+            padding: 20px;
+            text-align: center;
+            animation: slide-text 30s infinite ease-in-out;
+        }
+
+        .description h2 {
+            color: #083901;
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-family: fantasy;
+        }
+
+        .description h4 {
+            color: #333;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @keyframes slide-text {
+            0%, 18% {
+                transform: translateX(0);
+            }
+            20%, 38% {
+                transform: translateX(-100%);
+            }
+            40%, 58% {
+                transform: translateX(-200%);
+            }
+            60%, 78% {
+                transform: translateX(-300%);
+            }
+            80%, 98% {
+                transform: translateX(-400%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+      
+        .images{
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+             flex-wrap: wrap;
+             padding: 20px;
+        }
+
+       .ima img{
+            width: 400px;
+            height: 400px;
+            border-radius: 20px;
+            border-bottom: 3px solid #73ed6d;
+            box-shadow: 5px 20PX 60px rgba(2, 157, 35, 0.2);
+            transition: transform 1s ease, box-shadow 1s ease;
+        }
+
+        .ima:hover img{
+            transform: translateY(-8px);
+           box-shadow: 20px 25px 50px rgba(0, 0, 0, 0.15);
+            cursor: pointer ;
+
+        }
+
+        .ima .TEXT{
+            padding: 6px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            font-family: 'inter';
+            background-color: rgba(29, 28, 28, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            transition: all 0.5s ease;
+            
+        }
+        .ima .TEXT:hover{
+            transform: scale(0.9);
+            cursor: pointer;
+        }
+
+        .formation{
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+            font-family: fantasy;
+            color:#083901;
+            text-decoration: 2px underline;
+        }
+
+        .bloc-formation{
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .les_formation{
+            text-align: center;
+            background-color: rgba(29, 28, 28, 0.2);
+            padding: 10px;
+            border-radius: 20px;
+            width: 300px;
+            height: auto;
+            flex-wrap: wrap;
+            border-bottom: 3px solid #139902;
+            transition: all 1s ease-in-out;
+
+        }
+
+        .les_formation .icon {
+            background-color: white;
+            border-radius: 10px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #087f02;
+            font-size: 30px;
+            border: 1px solid greenyellow;
+            transition: all 1s ease;
+            
+        }
+        
+        .les_formation h3, p{
+            font-family: 'inter';
+
+        }
+
+        .les_formation .icon:hover{
+             border: 2px solid greenyellow;
+             background-color: #083901;
+             color: greenyellow;
+             cursor: pointer;
+
+        }
+        .les_formation:hover{
+            transform: scale(0.9);
+            cursor: pointer;
+
+        }
+        .plus{
+            display: flex;
+            justify-content: center;
+            border-radius: 50px;
+            font-size: 50px;
+            border: 1px solid #087f02;
+            width: 70px;
+            height: 70px;
+            align-items: center;
+            margin: 30px auto;
+            color: #087f02;
+            background-color:rgba(29, 28, 28, 0.2); 
+            transition: all 1s ease-in-out;
+           
+        }
+        .plus a{
+            text-decoration: none;
+            color: #087f02;
+        }
+        .plus:hover{
+            transform: rotate(360deg);
+            cursor: pointer;
+            border: 1px solid rgb(132, 221, 0);
+             
+        }
+
+        .letext{
+            font-family: fantasy;
+            color: #083901;
+            display: flex;
+            justify-content: center;
+            margin: 10px;
+        }
+         .letext h2{
+            text-decoration: 2px underline;
+        }
+
+        .les-contacts{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: #087f02;
+            height: auto;
+            width: 100%;
+        }
+        .les-contacts .contact{
+            display: flex;
+            justify-content: center;
+            padding: 50px;
+            gap: 90px;
+            flex-wrap: wrap;
+        }
+
+        .contact a{
+            background-color: rgba(255,255,255,0.20);
+            display: flex;
+            justify-content: center;
+            text-decoration: none;
+            align-items: center;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgb(255,255,255,0.18) ;
+            transition: all 2s ease;
+            font-size: 30px;
+            color: white;
+        }
+        .contact a:hover{
+            transform: rotateY(360deg);
+            color:greenyellow;
+            box-shadow: 0px 1px 4px white  ;
+            
+        };
+
+
+      
+    </style>
+</head>
+<body>
+    <header>
+        <div class="Lien">
+            <nav>
+                <a href= "{{ url_for('accueil') }}" >  <i class="fas fa-home"></i>Accueil</a>
+                <a href= "{{ url_for('accueil') }}#formation">  <i class="fas fa-graduation-cap"></i>Formations</a>
+                <a href= "{{ url_for('portail') }}">  <i class="fas fa-user-plus"></i>Portail</a>
+                <a href="{{ url_for('connexion') }}"><i class="fas fa-right-to-bracket"></i> Se connecter</a>
+            </nav>
+        </div>
+    </header>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='images/Ecam.png') }}" alt="">
+
+    </div>
+    <div class="contener">
+
+        <div class="slide-text">
+            <div class="text">
+                <div class="description">
+        
+                    <h2>ECOLE CANADIENNE DE MANAGEMENT</h2>
+                    <h4>Formez-vous aujourd'hui pour relever les défis technologiques de demain. Rejoignez une université qui place l'excellence, l'innovation et la réussite de ses étudiants au cœur de sa mission.</h4>
+                </div>
+                <div class="description">
+                    
+                    <h2>Des formation de Qualité </h2>
+                    <h4>Des programmes modernes, adaptés aux besoins du marché de l'emploi, dispensés par des enseignants qualifiés et des professionnels expérimentés.</h4>
+                </div>
+                <div class="description">
+                    
+                    <h2>Innovation</h2>
+                    <h4>Développez vos compétences en informatique, intelligence artificielle, réseaux, gestion, génie civil, électronique et bien d'autres domaines d'excellence.</h4>
+                </div>
+                <div class="description">
+                    
+                    <h2>Réussite</h2>
+                    <h4>Un accompagnement personnalisé, des projets pratiques et un environnement propice à la réussite académique et professionnelle.</h4>
+                </div>
+                <div class="description">
+                    
+                    <h2>Vie étudiante</h2>
+                    <h4>Un accompagnement personnalisé, des projets pratiques et un environnement propice à la réussite académique et professionnelle.</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+        <div class="images">
+            
+            <div class="ima">
+                <img src="{{ url_for('static', filename='images/etudiants .jpg') }}" alt="">
+                <div class="TEXT"> <h3>VISITE</h3> </div>
+            </div>
+            <div class="ima">
+                <img src="{{ url_for('static', filename='images/etudiant.jpg') }}" alt="">
+                <div class="TEXT"> <h3>ARCHIVE 2023</h3> </div>
+            </div>
+            <div class="ima">
+                <img src="{{ url_for('static', filename='images/visite.jpg') }}" alt="">
+                <div class="TEXT"> <h3>VISITE</h3> </div>
+            </div>
+            <div class="ima">
+                <img src="{{ url_for('static', filename='images/Dg.jpg') }}" alt="">
+                <div class="TEXT"> <h3>Evenement </h3> </div>
+            </div>
+        </div>
+    
+    <div class="formation" id="formation">
+        <h2>Formations</h2>
+    </div>
+
+    <div class="bloc-formation">
+
+        
+           <div class="les_formation">
+            <div class="icon">
+                
+                <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3>Genie Informatique & Intelligence Artificielle</h3>
+            <p>Conception de systèmes intelligents, machine learning et développement de solutions logicielles innovantes.</p>
+        </div>
+
+        <div class="les_formation">
+            <div class="icon">
+                
+                <i class="fas fa-cogs"></i>
+            </div>
+            <h3>Genie Industriel & Maintenance des Systèmes Pluritechniques</h3>
+            <p>Optimisation des processus industriels, gestion de la maintenance et supervision des systèmes automatisés.</p>
+        </div>
+
+        <div class="les_formation">
+            <div class="icon">
+                
+                <i class="fas fa-bolt"></i>
+            </div>
+            <h3>Electrique & Informatique Industrielle</h3>
+            <p>Maîtrise des réseaux électriques, programmation des automates et supervision des systèmes embarqués.</p>
+        </div>
+
+        <div class="les_formation">
+            <div class="icon">
+                
+                <i class="fas fa-file-invoice-dollar"></i>
+            </div>
+            <h3>Comptabilité, Contrôle & Audit</h3>
+            <p>Gestion des flux financiers, analyse des comptes et maîtrise des normes comptables internationales.</p>
+        </div>
+
+        <div class="les_formation">
+            <div class="icon">
+                
+                <i class="fas fa-truck"></i>
+            </div>
+            <h3>Transport & Logistique</h3>
+            <p>Gestion de la chaîne d'approvisionnement, optimisation des flux et pilotage des opérations logistiques.</p>
+        </div>
+
+        <div class="les_formation">
+            <div class="icon">
+                
+                <i class="fas fa-users"></i>
+            </div>
+            <h3>Gestion des Ressources Humaines</h3>
+            <p>Recrutement, gestion des compétences, administration du personnel et développement des talents.</p>
+        </div>
+
+    </div>
+    <div class="plus">
+        <a href="{{ url_for('formations') }}"><i class="fas fa-plus"></i></a>
+    </div>
+
+     <div class="letext">
+            <h2>Contatez Nous </h2>
+        </div>
+    <div class="les-contacts">
+        <div class="contact">
+            <a href=""><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/ecamcongo/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@ecamcongo?lang=fr"><i class="fab fa-tiktok"></i></a>
+            <a href=""><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    {% include '_chatbot.html' %}
+</body>
+</html>

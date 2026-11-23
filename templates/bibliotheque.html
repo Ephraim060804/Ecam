@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block titre %}Bibliothèque · ECAM{% endblock %}
+{% block ecam %}
+<form class="carte recherche" method="get">
+    <input class="champ" name="q" value="{{ t }}" placeholder="Titre ou matière" aria-label="Rechercher">
+    <button class="btn" type="submit"><i class="fas fa-search"></i> Rechercher</button>
+    <a class="btn btn-clair" href="{{ url_for('ajout') }}"><i class="fas fa-upload"></i> Ajouter un document</a>
+</form>
+<section class="carte">
+{% if livres %}
+<div class="defile"><table class="tableau"><tr><th>Titre</th><th>Matière</th><th>Filière</th><th>Année</th><th></th></tr>
+{% for l in livres %}<tr><td>{{ l.titre }}</td><td>{{ l.matiere or '—' }}</td><td>{{ l.filiere or '—' }}</td><td>{{ l.annee or '—' }}</td>
+<td><a href="{{ url_for('fichier', livre_id=l.id) }}"><i class="fas fa-download"></i> PDF</a></td></tr>{% endfor %}</table></div>
+{% else %}<p class="vide">Aucun document trouvé. Ajoutez le premier pour enrichir la bibliothèque.</p>{% endif %}
+</section>
+{% if attente %}
+<section class="carte"><h2>Documents à valider</h2>
+{% for l in attente %}<form class="ligne-valid" method="post" action="{{ url_for('valider_livre', livre_id=l.id) }}">
+<input type="hidden" name="csrf" value="{{ csrf_token }}"><span>{{ l.titre }} ({{ l.matiere or '—' }})</span>
+<button class="btn" name="decision" value="valide">Publier</button><button class="btn btn-clair" name="decision" value="refuse">Refuser</button></form>{% endfor %}
+</section>{% endif %}
+{% endblock %}
